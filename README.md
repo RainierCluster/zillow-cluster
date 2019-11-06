@@ -1,5 +1,5 @@
 ## Rainier's Cluster Project using Zillow Data Set
-#### Presented by: Cris and Misty
+##### Presented by Cris Giovanoni and Misty Garcia
 
 ### Goals:
 - Improve the original zestimate "logerror" by using clustering methodologies
