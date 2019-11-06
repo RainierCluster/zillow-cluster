@@ -42,9 +42,14 @@ def impute_lotsize_nulls(df):
     df["lotsizesquarefeet"] = df_subset.lotsizesquarefeet.round(0)
     return df
 
+def feature_eng(df):
+    df["land_area"] = df.lotsizesquarefeet - df.calculatedfinishedsquarefeet
+    return df
+
 def pretty_cols(df):
     # better understood column names
     df = df.rename(columns={"calculatedfinishedsquarefeet":"house_area", "fips":"countyid", "structuretaxvaluedollarcnt":"house_value", "landtaxvaluedollarcnt":"land_value", "taxvaluedollarcnt":"whole_value", "lotsizesquarefeet":"whole_area"})
+
     # reorder columns based on relevancy to others
-    df = df[["countyid","latitude","longitude","yearbuilt","bathroomcnt","bedroomcnt","house_area","house_value","whole_area","whole_value","land_value","taxamount","logerror","transactiondate"]]
+    df = df[["countyid","latitude","longitude","yearbuilt","bathroomcnt","bedroomcnt","house_area", "house_value","land_area","land_value","whole_area","whole_value", "taxamount","logerror","transactiondate"]]
     return df
