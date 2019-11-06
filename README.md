@@ -1,16 +1,16 @@
 ## Rainier's Cluster Project using Zillow Data Set
 ##### Presented by Cris Giovanoni and Misty Garcia
 
-### Goals:
-- Improve the original zestimate "logerror" by using clustering methodologies
+### Goals
+- Improve the zestimate "logerror" by using clustering methodologies
 - Identify what is driving the difference in logerror to sales price
 - Build a model to predict your target logerror
 
-### Hypothesis:
+### Hypotheses
 - Noteable clusters will be based on location
 - A model containing the clusters based on location will perform better than a model without clusters based on location
 
-### Components:
+### Components
 - Use clustering
 - Teach others
 - Use statistical tests
@@ -21,16 +21,16 @@
 - Code resuseability/modularity
 - Stages of pipeline
 
-### Deliverables: 
+### Deliverables
 - Notebook
 - Supporting materials
 - Present findings/learnings to class
 
-### Required to run:
+### Required to run
 - Access to the bayes sql database
 - env.py file with host, username, and password
 
-### How to reproduce:
+### How to reproduce
 - Pull .py files
 - Add personal env.py file
 - Run through "Using Clustering to Reduce Log Error in the Zillow Dataset.ipynb" pipeline
