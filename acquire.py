@@ -15,7 +15,7 @@ def get_db_url(db):
 
 def get_sql_zillow():
     """
-    Queries from zillow database for transactions in 2017:
+    Obtain queries from zillow database for transactions in 2017:
     - Merged all tables on the main properties table
     - Removed properties with not latitude and longitude
     >> Input:
@@ -46,9 +46,9 @@ def get_sql_zillow():
     df = pd.read_sql(query, get_db_url("zillow"))
     return df
 
-def wrangle_zillow():
+def wrangle_zillow(df):
     """
-    Queries from zillow database with the following conditions:
+    Filter properties with the following conditions:
     - Transactions from 2017 only
     - Kept only the latest transactions
     - Filtered by single-unit properties
@@ -57,8 +57,6 @@ def wrangle_zillow():
     << Output:
     wrangled dataframe
     """    
-    # get zillow data from mysql
-    df = get_sql_zillow()
     # keep only 2017 values
     df = df [df.transactiondate.str.startswith("2017")]
     # keep only the most recent transaction date
