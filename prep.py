@@ -1,4 +1,4 @@
-import pandas as import pd 
+import pandas as pd 
 import numpy as numpy
 
 def handle_missing_values(df, prop_required_column, prop_required_row):
