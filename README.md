@@ -1,4 +1,5 @@
 ## Rainier's Cluster Project using Zillow Data Set
+#### Presented by: Cris and Misty
 
 ### Goals:
 - Improve the original zestimate "logerror" by using clustering methodologies
@@ -20,7 +21,7 @@
 - Code resuseability/modularity
 - Stages of pipeline
 
-## Deliverables: 
+### Deliverables: 
 - Notebook
 - Supporting materials
 - Present findings/learnings to class
