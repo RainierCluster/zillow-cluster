@@ -26,3 +26,13 @@
 - Supporting materials
 - Present findings/learnings to class
 
+### Required to run:
+- Access to the bayes sql database
+- env.py file with host, username, and password
+
+### How to reproduce:
+- Pull .py files
+- Add personal env.py file
+- Run through "Using Clustering to Reduce Log Error in the Zillow Dataset.ipynb" pipeline
+- Random states of 123 are set in .py files
+
