@@ -38,18 +38,18 @@ def impute_lotsize_nulls(df):
     Calculate a proportion from lot size and tax value. Disregard outliers, and calculate a mean proportion. Mulitple that mean proportion with the tax value to impute lot sizes for null values. 
     """
     # create subset dataframe with lot size and tax value
-    df_subset = df [["lotsizesquarefeet", "taxvaluedollarcnt"]]
+    df_subset = df [["whole_area", "whole_value"]]
     # create a new column that takes the proportion of lot size to tax value
-    df_subset["proportionlotandvalue"] = df_subset.lotsizesquarefeet.dropna() / df_subset.taxvaluedollarcnt
+    df_subset["proportionwhole"] = df_subset.whole_area.dropna() / df_subset.whole_value
     # get the average mean of proportions that are less than 1 and add it to a column
-    mean_proportion = df_subset [df_subset.proportionlotandvalue < 1].proportionlotandvalue.mean()
+    mean_proportion = df_subset [df_subset.proportionwhole < 1].proportionwhole.mean()
     df_subset["mean"] = mean_proportion
     # fill all the nulls in lot saize with the calculated mean
-    df_subset.lotsizesquarefeet.fillna(df_subset.taxvaluedollarcnt * df_subset["mean"], inplace=True)
+    df_subset.whole_area.fillna(df_subset.whole_value * df_subset["mean"], inplace=True)
     # replace old lot size with null-free lot size to the original dataframe 
-    df["lotsizesquarefeet"] = df_subset.lotsizesquarefeet.round(0)
+    df["whole_area"] = df_subset.whole_area.round(0)
     return df
 
 def feature_eng(df):
-    df["land_area"] = df.lotsizesquarefeet - df.calculatedfinishedsquarefeet
+    df["land_area"] = df.whole_area - df.house_area
     return df
