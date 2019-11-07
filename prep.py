@@ -64,6 +64,6 @@ def impute_lotsize_nulls(train, test):
     test.drop(columns="mean", inplace=True)
     return train, test
 
-def feature_eng(df):
+def cal_land_area(df):
     df["land_area"] = df.whole_area - df.house_area
     return df
