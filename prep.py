@@ -25,6 +25,14 @@ def drop_minimal_nulls(df):
     df.dropna(axis=0,subset=["calculatedfinishedsquarefeet","structuretaxvaluedollarcnt", "taxvaluedollarcnt","landtaxvaluedollarcnt","taxamount", "yearbuilt"], inplace=True)
     return df
 
+def pretty_cols(df):
+    # better understood column names
+    df = df.rename(columns={"calculatedfinishedsquarefeet":"house_area", "fips":"countyid", "structuretaxvaluedollarcnt":"house_value", "landtaxvaluedollarcnt":"land_value", "taxvaluedollarcnt":"whole_value", "lotsizesquarefeet":"whole_area"})
+
+    # reorder columns based on relevancy to others
+    df = df[["countyid","latitude","longitude","yearbuilt","bathroomcnt","bedroomcnt","house_area", "house_value","land_value","whole_area","whole_value","taxamount","logerror","transactiondate"]]
+    return df
+
 def impute_lotsize_nulls(df):
     """
     Calculate a proportion from lot size and tax value. Disregard outliers, and calculate a mean proportion. Mulitple that mean proportion with the tax value to impute lot sizes for null values. 
@@ -44,12 +52,4 @@ def impute_lotsize_nulls(df):
 
 def feature_eng(df):
     df["land_area"] = df.lotsizesquarefeet - df.calculatedfinishedsquarefeet
-    return df
-
-def pretty_cols(df):
-    # better understood column names
-    df = df.rename(columns={"calculatedfinishedsquarefeet":"house_area", "fips":"countyid", "structuretaxvaluedollarcnt":"house_value", "landtaxvaluedollarcnt":"land_value", "taxvaluedollarcnt":"whole_value", "lotsizesquarefeet":"whole_area"})
-
-    # reorder columns based on relevancy to others
-    df = df[["countyid","latitude","longitude","yearbuilt","bathroomcnt","bedroomcnt","house_area", "house_value","land_area","land_value","whole_area","whole_value", "taxamount","logerror","transactiondate"]]
     return df
