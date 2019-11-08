@@ -8,7 +8,7 @@
 
 ### Hypotheses
 - Noteable clusters will be based on location
-- A model containing the clusters based on location will perform better than a model without clusters based on location
+- A model containing the clusters will better predict logerror
 
 ### Components
 - Use clustering
@@ -22,7 +22,7 @@
 - Stages of pipeline
 
 ### Deliverables
-- Notebook
+- Notebook (reduce_zillow_logerror.ipynb)
 - Supporting materials
 - Present findings/learnings to class
 
@@ -31,8 +31,13 @@
 - env.py file with host, username, and password
 
 ### How to reproduce
-- Pull .py files
+- Pull all .py files
+    - acquire.py
+    - prep.py
+    - split_scale.py
+    - explore.py
+    - model.py
 - Add personal env.py file
-- Run through "Using Clustering to Reduce Log Error in the Zillow Dataset.ipynb" pipeline
-- Random states of 123 are set in .py files
+- Run through reduce_zillow_logerror.ipynb pipeline
+    - Random states of 123 are set in .py files
 
