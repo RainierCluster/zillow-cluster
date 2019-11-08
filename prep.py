@@ -30,7 +30,7 @@ def pretty_cols(df):
     df = df.rename(columns={"calculatedfinishedsquarefeet":"house_area", "fips":"countyid", "structuretaxvaluedollarcnt":"house_value", "landtaxvaluedollarcnt":"land_value", "taxvaluedollarcnt":"whole_value", "lotsizesquarefeet":"whole_area"})
 
     # reorder columns based on relevancy to others
-    df = df[["countyid","latitude","longitude","yearbuilt","bathroomcnt","bedroomcnt","house_area", "house_value","land_value","whole_area","whole_value","taxamount","logerror","transactiondate"]]
+    df = df[["countyid","latitude","longitude","yearbuilt","bathroomcnt","bedroomcnt","house_area", "whole_area", "house_value","land_value","whole_value","taxamount","logerror","transactiondate"]]
     return df
 
 def cal_taxrate(df):
@@ -66,4 +66,11 @@ def impute_lotsize_nulls(train, test):
 
 def cal_land_area(df):
     df["land_area"] = df.whole_area - df.house_area
+
+    df = df[["countyid","latitude","longitude","yearbuilt","bathroomcnt","bedroomcnt","house_area", "land_area", "whole_area", "house_value","land_value","whole_value","taxrate","logerror", "month"]]
+    return df
+
+def define_month(df):
+    df["month"] = pd.DatetimeIndex(df.transactiondate).month
+    df.drop("transactiondate",axis=1, inplace=True)
     return df
