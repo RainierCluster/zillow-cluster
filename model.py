@@ -3,8 +3,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-from math import sqrt
-from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.metrics import median_absolute_error, r2_score
 from sklearn.linear_model import LinearRegression
 
 def compute_baseline(df):
@@ -19,11 +18,9 @@ def linear_model(X_train, y_train, df):
     return df
 
 def evaluate(actual, model):
-    MSE = mean_squared_error(actual, model)
-    SSE = MSE*len(actual)
-    RMSE = sqrt(MSE)
-    r2 = r2_score(actual, model)
-    return SSE, MSE, RMSE, r2 
+    mae = median_absolute_error(actual,predict)
+    r2 = r2_score(actual, predict)
+    return mae, r2 
 
 
 def plot_linear_model(actuals, lm, baseline):
