@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 
 from sklearn.metrics import median_absolute_error, r2_score
 from sklearn.linear_model import LinearRegression
+from sklearn.cluster import KMeans
 
 def compute_baseline(df):
     df["logerror_mean"] = df.logerror.mean()

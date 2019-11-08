@@ -5,7 +5,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-from sklearn.cluster import KMeans, dbscan
+from sklearn.cluster import KMeans
 from scipy import stats
 
 def features_num_values(df):
@@ -23,6 +23,7 @@ def features_num_values(df):
             print(df[feature].value_counts(bins=10, sort=False))
         else:
             print(df[feature].value_counts())
+
 
 def elbow(df, points=10):
     ks = range(1,points+1)
@@ -54,7 +55,6 @@ def k_cluster_2d(df, x, y, n_max, n_min=2):
         sns.relplot(data=df, x=x, y=y, hue='cluster')
         plt.title(f'{n} Clusters')
     df.drop(columns="cluster", inplace=True)
-
 
 def k_cluster_3d(df, x, y, z, n):
     """
@@ -88,26 +88,3 @@ def k_cluster_all(df, x, n):
         sns.relplot(data=df, x=x, y=col, hue='cluster', alpha=.5)
         plt.show()
     df.drop(columns="cluster", inplace=True)
-
-
-def db_cluster_2d(df, eps, minPts):
-    """
-    Import a dataframe containing only the selected x and y value in it, and the eps and min points
-    """
-    cores, labels = dbscan(df, eps=eps, min_samples=minPts)
-    df['cluster'] = labels
-
-    for c in df.cluster.unique():
-        subset = df[df.cluster == c]
-        marker = 'x' if c == -1 else 'o'
-        plt.scatter(subset.iloc[:,0], subset.iloc[:,1], marker=marker, label=c, zorder=3)
-        
-    plt.title(f'DBSCAN, eps={eps}, minPts={minPts}')
-    plt.legend()
-
-
-# def stat_cluster()
-#     for df.cluster.unique()
-#     stats.ttest_1samp(train_ex.logerror[train_ex.cluster_loc == 4],train_ex.logerror.mean())
-
-
