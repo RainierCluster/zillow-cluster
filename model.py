@@ -10,12 +10,21 @@ def compute_baseline(df):
     df["logerror_mean"] = df.logerror.mean()
     return df
 
+
+def kmeans_model(df,n):
+    kmeans = KMeans(n_clusters=n)
+    kmeans.fit(df)
+    df["clusters"] = kmeans.labels_
+    return df
+
+
 def linear_model(X_train, y_train, df):
     lm=LinearRegression()
     lm.fit(X_train,y_train)
     lm_predictions=lm.predict(X_train)
     df['lm']=lm_predictions
     return df
+
 
 def evaluate(actual, model):
     mae = median_absolute_error(actual,predict)

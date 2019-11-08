@@ -38,12 +38,11 @@ def elbow(df, points=10):
     plt.show()
 
 
-def k_cluster_2d(df1, x, y, n_max, n_min=2):
+def k_cluster_2d(df, x, y, n_max, n_min=2):
     """
     Plots a 2D cluster map of an inputted x and y, starting at 2 clusters, up to inputted max cluster amount
     Import whole dataframe, select the x and y values to cluster.
     """
-    df = df1
     for n in range(n_min,n_max+1):
         if "cluster" in df.columns:
             df = df.drop("cluster",axis=1)
@@ -54,6 +53,7 @@ def k_cluster_2d(df1, x, y, n_max, n_min=2):
 
         sns.relplot(data=df, x=x, y=y, hue='cluster')
         plt.title(f'{n} Clusters')
+    df.drop(columns="cluster", inplace=True)
 
 
 def k_cluster_3d(df, x, y, z, n):
@@ -75,11 +75,10 @@ def k_cluster_3d(df, x, y, z, n):
     ax.zaxis.labelpad=-5
     plt.show()
 
-def k_cluster_all(df1, x, n):
+def k_cluster_all(df, x, n):
     """
     Takes a dataframe and a single feature, and performs a 2d kmeans clustering on that feature against all other features in the dataframe. Also, specify the number of clusters to explore.
-    """
-    df = df1    
+    """  
     kmeans = KMeans(n_clusters=n, random_state=123)
     kmeans.fit(df)
     df["cluster"] = kmeans.predict(df)
@@ -88,6 +87,7 @@ def k_cluster_all(df1, x, n):
     for col in df.columns:
         sns.relplot(data=df, x=x, y=col, hue='cluster', alpha=.5)
         plt.show()
+    df.drop(columns="cluster", inplace=True)
 
 
 def db_cluster_2d(df, eps, minPts):
