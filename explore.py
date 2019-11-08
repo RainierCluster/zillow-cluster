@@ -3,6 +3,7 @@ import numpy as np
 
 import seaborn as sns
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 
 from sklearn.cluster import KMeans, dbscan
 
@@ -33,6 +34,7 @@ def elbow(df, points=10):
     plt.title('The Elbow Method to find the optimal k')
     plt.show()
 
+
 def k_cluster_2d(df, x, y, n_max, n_min=2):
     """
     Plots a 2D cluster map of an inputted x and y, starting at 2 clusters, up to inputted max cluster amount
@@ -53,6 +55,34 @@ def k_cluster_2d(df, x, y, n_max, n_min=2):
         sns.relplot(data=df, x=x, y=y, hue='cluster')
         plt.title(f'{n} Clusters')
 
+
+def k_cluster_3d(df, x, y, z, c1, c2):
+    """
+    Displays two 3d plots with different cluster sizes based on the dataframe entered. 
+    >>> Input:
+    dataframe, x-value, y-value, z-value, first number of clusters, second number of clusters
+    <<< Output:
+    two subplots with df plotted and clusters shown as hues
+    """
+    estimators = [(f'{c1} Clusters', KMeans(n_clusters=c1)),
+                (f'{c2} Clusters', KMeans(n_clusters=c2))]
+
+    fig, axs = plt.subplots(1, 2, figsize=(14, 6), subplot_kw={'projection': '3d'})
+
+    for ax, (title, kmeans) in zip(axs, estimators):
+        # fit the kmeans object
+        kmeans.fit(df)
+        labels = kmeans.labels_
+
+        ax.scatter(df[x], df[y], df[z], c=labels.astype(np.float), edgecolor='k')
+        ax.set(xticklabels=[], yticklabels=[], zticklabels=[])
+        ax.xaxis.labelpad=-5
+        ax.yaxis.labelpad=-5
+        ax.zaxis.labelpad=-5
+        ax.set(xlabel=x, ylabel=y, zlabel=y)
+        ax.set(title=title)
+
+
 def k_cluster_all(df, x, n):
     """
     Takes a dataframe and a single feature, and performs a 2d kmeans clustering on that feature against all other features in the dataframe. Also, specify the number of clusters to explore.
@@ -68,6 +98,7 @@ def k_cluster_all(df, x, n):
     for col in df.columns:
         sns.relplot(data=df, x=x, y=col, hue='cluster')
         plt.show()
+
 
 def db_cluster_2d(df, eps, minPts):
     """
