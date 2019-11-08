@@ -20,7 +20,6 @@ def features_num_values(df):
         else:
             print(df[feature].value_counts())
 
-
 def elbow(df, points=10):
     ks = range(1,points+1)
     sse = []
