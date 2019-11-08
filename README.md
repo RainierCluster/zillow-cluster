@@ -2,9 +2,9 @@
 ##### Presented by Cris Giovanoni and Misty Garcia
 
 ### Goals
-- Improve the zestimate "logerror" by using clustering methodologies
-- Identify what is driving the difference in logerror to sales price
-- Build a model to predict your target logerror
+- Using clustering methodologies
+- Identify what is driving the difference in zestimate to sales price "logerror"
+- Build a model to predict your target "logerror"
 
 ### Hypotheses
 - Noteable clusters will be based on location
