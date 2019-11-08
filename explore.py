@@ -6,8 +6,12 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 from sklearn.cluster import KMeans, dbscan
+from scipy import stats
 
 def features_num_values(df):
+    """
+    Takes each numeric feature in dataframe and plots the distribution and display the value count.
+    """
     features_num = list(df.select_dtypes(np.number).columns)
 
     for feature in features_num:
@@ -38,10 +42,6 @@ def k_cluster_2d(df, x, y, n_max, n_min=2):
     """
     Plots a 2D cluster map of an inputted x and y, starting at 2 clusters, up to inputted max cluster amount
     Import whole dataframe, select the x and y values to cluster.
-    >> Input:
-    dataframe, x-variable, y-variable, max-cluster amount, an optional min-cluster amount (default 2)
-    << Output:
-    multiple cluster maps
     """
     for n in range(n_min,n_max+1):
         if "cluster" in df.columns:
@@ -55,32 +55,24 @@ def k_cluster_2d(df, x, y, n_max, n_min=2):
         plt.title(f'{n} Clusters')
 
 
-def k_cluster_3d(df, x, y, z, c1, c2):
+def k_cluster_3d(df, x, y, z, n):
     """
-    Displays two 3d plots with different cluster sizes based on the dataframe entered. 
-    >>> Input:
-    dataframe, x-value, y-value, z-value, first number of clusters, second number of clusters
-    <<< Output:
-    two subplots with df plotted and clusters shown as hues
+    Displays 3d plot of clusters.
     """
-    estimators = [(f'{c1} Clusters', KMeans(n_clusters=c1)),
-                (f'{c2} Clusters', KMeans(n_clusters=c2))]
+    kmeans = KMeans(n_clusters=n)
+    kmeans.fit(df)
+    labels = kmeans.labels_
 
-    fig, axs = plt.subplots(1, 2, figsize=(14, 6), subplot_kw={'projection': '3d'})
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
 
-    for ax, (title, kmeans) in zip(axs, estimators):
-        # fit the kmeans object
-        kmeans.fit(df)
-        labels = kmeans.labels_
-
-        ax.scatter(df[x], df[y], df[z], c=labels.astype(np.float), edgecolor='k')
-        ax.set(xticklabels=[], yticklabels=[], zticklabels=[])
-        ax.xaxis.labelpad=-5
-        ax.yaxis.labelpad=-5
-        ax.zaxis.labelpad=-5
-        ax.set(xlabel=x, ylabel=y, zlabel=y)
-        ax.set(title=title)
-
+    ax.scatter(df[x], df[y], df[z], c=labels, edgecolors="grey",alpha=.5)
+    ax.set(xticklabels=[], yticklabels=[], zticklabels=[])
+    ax.set(xlabel=x, ylabel=y, zlabel=z)
+    ax.xaxis.labelpad=-5
+    ax.yaxis.labelpad=-5
+    ax.zaxis.labelpad=-5
+    plt.show()
 
 def k_cluster_all(df, x, n):
     """
@@ -114,5 +106,9 @@ def db_cluster_2d(df, eps, minPts):
     plt.title(f'DBSCAN, eps={eps}, minPts={minPts}')
     plt.legend()
 
+
+def stat_cluster()
+    for df.cluster.unique()
+    stats.ttest_1samp(train_ex.logerror[train_ex.cluster_loc == 4],train_ex.logerror.mean())
 
 
