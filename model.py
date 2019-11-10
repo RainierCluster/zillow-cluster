@@ -25,9 +25,9 @@ def linear_model(X_train, y_train, df):
     lm_predictions=lm.predict(X_train)
     df['lm']=lm_predictions
     return df
+    
 
-
-def evaluate(actual, model):
+def evaluate(actual, predict):
     mae = median_absolute_error(actual,predict)
     r2 = r2_score(actual, predict)
     return mae, r2 
