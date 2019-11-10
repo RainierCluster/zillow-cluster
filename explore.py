@@ -67,7 +67,7 @@ def k_cluster_3d(df, x, y, z, n):
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
-    ax.scatter(df[x], df[y], df[z], c=labels, edgecolors="grey",alpha=.5)
+    ax.scatter(df[x], df[y], df[z], c=labels, edgecolor="k",alpha=.5)
     ax.set(xticklabels=[], yticklabels=[], zticklabels=[])
     ax.set(xlabel=x, ylabel=y, zlabel=z)
     ax.xaxis.labelpad=-5
