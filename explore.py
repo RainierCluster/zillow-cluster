@@ -45,8 +45,6 @@ def k_cluster_2d(df, x, y, n_max, n_min=2):
     Import whole dataframe, select the x and y values to cluster.
     """
     for n in range(n_min,n_max+1):
-        if "cluster" in df.columns:
-            df = df.drop("cluster",axis=1)
         kmeans = KMeans(n_clusters=n, random_state=123)
         kmeans.fit(df)
         df["cluster"] = kmeans.predict(df)
