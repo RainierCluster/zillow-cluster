@@ -15,8 +15,7 @@ def compute_baseline(df):
 def kmeans_model(df,n):
     kmeans = KMeans(n_clusters=n)
     kmeans.fit(df)
-    df["clusters"] = kmeans.labels_
-    return df
+    return kmeans.labels_
 
 
 def linear_model(X_train, y_train, df):
@@ -25,7 +24,7 @@ def linear_model(X_train, y_train, df):
     lm_predictions=lm.predict(X_train)
     df['lm']=lm_predictions
     return df
-    
+
 
 def evaluate(actual, predict):
     mae = median_absolute_error(actual,predict)
