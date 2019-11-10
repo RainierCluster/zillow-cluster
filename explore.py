@@ -32,12 +32,13 @@ def elbow(df, points=10):
         kmeans = KMeans(n_clusters=k)
         kmeans.fit(df)
         sse.append(kmeans.inertia_)
+    print(pd.DataFrame(dict(k=ks, sse=sse)))
     plt.plot(ks, sse, 'bx-')
     plt.xlabel('k')
     plt.ylabel('SSE')
     plt.title('The Elbow Method to find the optimal k')
     plt.show()
-
+        
 
 def k_cluster_2d(df, x, y, n_max, n_min=2):
     """
@@ -50,9 +51,10 @@ def k_cluster_2d(df, x, y, n_max, n_min=2):
         df["cluster"] = kmeans.predict(df)
         df.cluster = 'cluster_' + (df.cluster + 1).astype('str')
 
-        sns.relplot(data=df, x=x, y=y, hue='cluster')
+        sns.relplot(data=df, x=x, y=y, hue='cluster', alpha=.5)
         plt.title(f'{n} Clusters')
-    df.drop(columns="cluster", inplace=True)
+        df.drop(columns="cluster", inplace=True)
+
 
 def k_cluster_3d(df, x, y, z, n):
     """
@@ -83,6 +85,7 @@ def k_cluster_all(df, x, n):
     df.cluster = 'cluster_' + (df.cluster + 1).astype('str')
 
     for col in df.columns:
-        sns.relplot(data=df, x=x, y=col, hue='cluster', alpha=.5)
-        plt.show()
+        if col != x and col != "cluster":
+            sns.relplot(data=df, x=x, y=col, hue='cluster', alpha=.3)
+            plt.show()
     df.drop(columns="cluster", inplace=True)

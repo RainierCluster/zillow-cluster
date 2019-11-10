@@ -7,11 +7,11 @@
 - Build a model to predict your target "logerror"
 
 ### Hypotheses
-- Noteable clusters will be based on location
+- Noteable clusters will be found based on location
 - A model containing the clusters will better predict logerror
 
 ### Components
-- Use clustering
+- Clusters
 - Teach others
 - Use statistical tests
 - Visualize to explore
