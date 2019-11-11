@@ -7,6 +7,14 @@ from sklearn.metrics import median_absolute_error, r2_score
 from sklearn.linear_model import LinearRegression
 from sklearn.cluster import KMeans
 
+def X_and_y(train, test):
+    X_train = train.drop(columns="logerror")
+    X_test = test.drop(columns="logerror")
+    y_train = train[["logerror"]]
+    y_test = test[["logerror"]]
+    return X_train, X_test, y_train, y_test
+
+
 def compute_baseline(df):
     df["logerror_mean"] = df.logerror.mean()
     return df
@@ -23,7 +31,7 @@ def linear_model(X_train, y_train, df):
     lm.fit(X_train,y_train)
     lm_predictions=lm.predict(X_train)
     df['lm']=lm_predictions
-    return df,lm
+    return df, lm
 
 
 def evaluate(actual, predict):
