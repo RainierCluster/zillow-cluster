@@ -106,7 +106,7 @@ def test_significance(cluster_column,df):
         ttest, pval = stats.ttest_1samp(df["logerror"][cluster_column ==cluster],df["logerror"].mean(),axis=0,nan_policy="propagate")
         ttest_list.append(ttest)
         pval_list.append(pval)
-        sig = pval < 0.025
+        sig = pval < 0.05
         stat_sig.append(sig)
         
     stats_cluster_column = pd.DataFrame({"ttest":ttest_list,"pval":pval_list,"stat_sig":stat_sig})
