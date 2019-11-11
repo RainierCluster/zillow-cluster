@@ -67,14 +67,17 @@ def k_cluster_3d(df, x, y, z, n):
     fig = plt.figure(figsize=(7,4))
     ax = fig.add_subplot(111, projection='3d')
   
-    ax.scatter(df[x], df[y], df[z], c=cluster_label,alpha=.5)
+    scatter = ax.scatter(df[x], df[y], df[z], c=cluster_label,alpha=.5)
+    legend = ax.legend(*scatter.legend_elements(),loc="lower left", title="Clusters")
+    
+    ax.add_artist(legend)
     ax.set(xticklabels=[], yticklabels=[], zticklabels=[])
     ax.set(xlabel=x, ylabel=y, zlabel=z)
     ax.xaxis.labelpad=-5
     ax.yaxis.labelpad=-5
     ax.zaxis.labelpad=-5
-    ax.legend(labels=cluster_label,loc=0)
     plt.show()
+
 
 def k_cluster_all(df, x, n):
     """
