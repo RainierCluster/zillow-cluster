@@ -23,7 +23,7 @@ def linear_model(X_train, y_train, df):
     lm.fit(X_train,y_train)
     lm_predictions=lm.predict(X_train)
     df['lm']=lm_predictions
-    return df
+    return df,lm
 
 
 def evaluate(actual, predict):
