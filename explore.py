@@ -29,7 +29,7 @@ def elbow(df, points=10):
     ks = range(1,points+1)
     sse = []
     for k in ks:
-        kmeans = KMeans(n_clusters=k)
+        kmeans = KMeans(n_clusters=k, random_state=123)
         kmeans.fit(df)
         sse.append(kmeans.inertia_)
     print(pd.DataFrame(dict(k=ks, sse=sse)))
@@ -60,7 +60,7 @@ def k_cluster_3d(df, x, y, z, n):
     """
     Displays 3d plot of clusters.
     """
-    kmeans = KMeans(n_clusters=n)
+    kmeans = KMeans(n_clusters=n, random_state=123)
     kmeans.fit(df)
     cluster_label = kmeans.labels_
 
