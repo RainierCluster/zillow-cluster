@@ -62,17 +62,18 @@ def k_cluster_3d(df, x, y, z, n):
     """
     kmeans = KMeans(n_clusters=n)
     kmeans.fit(df)
-    labels = kmeans.labels_
+    cluster_label = kmeans.labels_
 
-    fig = plt.figure()
+    fig = plt.figure(figsize=(7,4))
     ax = fig.add_subplot(111, projection='3d')
-
-    ax.scatter(df[x], df[y], df[z], c=labels, edgecolor="k",alpha=.5)
+  
+    ax.scatter(df[x], df[y], df[z], c=cluster_label,alpha=.5)
     ax.set(xticklabels=[], yticklabels=[], zticklabels=[])
     ax.set(xlabel=x, ylabel=y, zlabel=z)
     ax.xaxis.labelpad=-5
     ax.yaxis.labelpad=-5
     ax.zaxis.labelpad=-5
+    ax.legend(labels=cluster_label,loc=0)
     plt.show()
 
 def k_cluster_all(df, x, n):
@@ -102,7 +103,7 @@ def test_significance(cluster_column,df):
         ttest, pval = stats.ttest_1samp(df["logerror"][cluster_column ==cluster],df["logerror"].mean(),axis=0,nan_policy="propagate")
         ttest_list.append(ttest)
         pval_list.append(pval)
-        sig = pval < 0.05
+        sig = pval < 0.025
         stat_sig.append(sig)
         
     stats_cluster_column = pd.DataFrame({"ttest":ttest_list,"pval":pval_list,"stat_sig":stat_sig})
