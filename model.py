@@ -13,7 +13,7 @@ def compute_baseline(df):
 
 
 def kmeans_model(df,n):
-    kmeans = KMeans(n_clusters=n)
+    kmeans = KMeans(n_clusters=n, random_state=123)
     kmeans.fit(df)
     return kmeans.labels_
 
