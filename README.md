@@ -26,18 +26,14 @@
 - Supporting materials
 - Present findings/learnings to class
 
-### Required to run
-- Access to the bayes sql database
-- env.py file with host, username, and password
-
 ### How to reproduce
+- Use query_result.csv 
 - Pull all .py files
     - acquire.py
     - prep.py
     - split_scale.py
     - explore.py
     - model.py
-- Add personal env.py file
 - Run through reduce_zillow_logerror.ipynb pipeline
     - Random states of 123 are set in .py files
 
