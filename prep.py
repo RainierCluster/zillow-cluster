@@ -1,6 +1,8 @@
 import pandas as pd 
 import numpy as numpy
 
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+
 import warnings
 warnings.filterwarnings("ignore")
 
